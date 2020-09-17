@@ -63,6 +63,8 @@ const getStyleLoaders = ({
         ident: 'postcss',
         plugins: () => [
           // eslint-disable-next-line global-require
+          require('tailwindcss'),
+          // eslint-disable-next-line global-require
           require('postcss-flexbugs-fixes'),
           // eslint-disable-next-line global-require
           require('postcss-preset-env')({
