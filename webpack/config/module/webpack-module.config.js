@@ -71,7 +71,7 @@ module.exports = (envState) => {
                       name: 'sass-loader',
                       options: {
                         // Prepends app variables to every SCSS file
-                        prependData: '@import "~_variables.scss";',
+                        prependData: '@import "~styles/variables";',
                       },
                     },
                   ],
@@ -89,7 +89,7 @@ module.exports = (envState) => {
                     name: 'sass-loader',
                     options: {
                       // Prepends app variables to every SCSS file
-                      prependData: '@import "~_variables.scss";',
+                      prependData: '@import "~styles/variables";',
                     },
                   },
                 ],
