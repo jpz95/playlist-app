@@ -1,0 +1,27 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ide
+
+## visual studio code
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env**.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+**.keep

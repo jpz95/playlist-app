@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "useBuiltIns": "usage"
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-object-rest-spread",
+    "syntax-dynamic-import"
+  ]
+}
