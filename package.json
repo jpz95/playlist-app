@@ -1,7 +1,7 @@
 {
-  "name": "vue-2-template",
+  "name": "playlist",
   "version": "1.0.0",
-  "description": "vue2 + webpack4",
+  "description": "",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
