@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 // Import global styles
-import './app.css';
+import 'styles/_index.scss';
 
 import App from './app.vue';
 
