@@ -19,84 +19,31 @@ module.exports = (envState) => {
           loaders.configureMediaLoader(imageInlineSizeLimit),
           loaders.configureFontLoader(imageInlineSizeLimit),
           loaders.configureBabelLoader(),
-          {
-            test: /\.css$/,
-            oneOf: [
+          loaders.configureStyleLoader({
+            type: 'css',
+            cssLoaderOptions: {
+              importLoaders: 1,
+              sourceMap: isEnvProduction && shouldUseSourceMap,
+            },
+            ...envState,
+          }),
+          loaders.configureStyleLoader({
+            type: 'scss',
+            cssLoaderOptions: {
+              importLoaders: 3,
+              sourceMap: isEnvProduction && shouldUseSourceMap,
+            },
+            preprocessors: [
               {
-                resourceQuery: /module/,
-                ...loaders.configureStyleLoader({
-                  type: 'cssModules',
-                  cssLoaderOptions: {
-                    importLoaders: 1,
-                    // enable CSS Modules
-                    modules: {
-                      localIdentName: isEnvProduction
-                        ? '[hash:base64]'
-                        : '[path][name]__[local]',
-                    },
-                    sourceMap: isEnvProduction && shouldUseSourceMap,
-                  },
-                  ...envState,
-                }),
-              },
-              loaders.configureStyleLoader({
-                type: 'css',
-                cssLoaderOptions: {
-                  importLoaders: 1,
-                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                name: 'sass-loader',
+                options: {
+                  // Prepends app variables to every SCSS file
+                  prependData: '@import "~styles/variables";',
                 },
-                ...envState,
-              }),
-            ],
-          },
-          {
-            test: /\.scss$/,
-            oneOf: [
-              {
-                resourceQuery: /module/,
-                ...loaders.configureStyleLoader({
-                  type: 'scssModules',
-                  cssLoaderOptions: {
-                    importLoaders: 3,
-                    // enable CSS Modules
-                    modules: {
-                      localIdentName: isEnvProduction
-                        ? '[hash:base64]'
-                        : '[path][name]__[local]',
-                    },
-                    sourceMap: isEnvProduction && shouldUseSourceMap,
-                  },
-                  preprocessors: [
-                    {
-                      name: 'sass-loader',
-                      options: {
-                        // Prepends app variables to every SCSS file
-                        prependData: '@import "~styles/variables";',
-                      },
-                    },
-                  ],
-                  ...envState,
-                }),
               },
-              loaders.configureStyleLoader({
-                type: 'scss',
-                cssLoaderOptions: {
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction && shouldUseSourceMap,
-                },
-                preprocessors: [
-                  {
-                    name: 'sass-loader',
-                    options: {
-                      // Prepends app variables to every SCSS file
-                      prependData: '@import "~styles/variables";',
-                    },
-                  },
-                ],
-                ...envState,
-              }),
             ],
-          },
+            ...envState,
+          }),
           loaders.configureFallbackLoader(),
         ],
       },
