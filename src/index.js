@@ -3,15 +3,16 @@ import Vue from 'vue';
 // Import global styles
 import 'styles/_index.scss';
 
+import router from 'router/index';
+import SingleLayout from 'layouts/single-layout';
+
 import App from './app.vue';
 
-new Vue({
-  render: (h) => h(App),
-}).$mount('#app');
+Vue.component('single-layout', SingleLayout);
 
-if (module.hot) {
-  module.hot.accept('./app.vue', () => {
-    // eslint-disable-next-line no-console
-    console.log('accept');
-  });
-}
+Vue.config.productionTip = false;
+
+new Vue({
+  render: (render) => render(App),
+  router,
+}).$mount('#app');
