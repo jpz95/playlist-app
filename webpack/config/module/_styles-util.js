@@ -80,15 +80,6 @@ const getStyleLoaders = ({
   ].filter(Boolean);
 
   if (preprocessors && preprocessors.length > 0) {
-    // TODO verify its importance.
-    // Handles url() calls for SCSS
-    // loaders.push({
-    //   loader: require.resolve('resolve-url-loader'),
-    //   options: {
-    //     sourceMap: isEnvProduction && shouldUseSourceMap,
-    //   },
-    // });
-
     preprocessors.forEach(({ name, options }) => {
       loaders.push(
         {
