@@ -1,0 +1,20 @@
+@mixin fontface($font-name, $type, $weight, $style) {
+  @font-face {
+    font-family: $font-name;
+    // webpack looks for this relative to src/styles/_index.scss
+    src: url('../fonts/#{$font-name}/#{$font-name}-#{$type}.eot');
+    src: local('#{$font-name} #{$type}'),
+         local('#{$font-name}-#{$type}'),
+         url('../fonts/#{$font-name}/#{$font-name}-#{$type}.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/#{$font-name}/#{$font-name}-#{$type}.woff2') format('woff2'),
+         url('../fonts/#{$font-name}/#{$font-name}-#{$type}.woff') format('woff'),
+         url('../fonts/#{$font-name}/#{$font-name}-#{$type}.ttf') format('truetype');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@include fontface('noto-sans', 'regular', 400, normal);
+@include fontface('noto-sans', 'italic', 400, italic);
+@include fontface('noto-sans', 'bold', 700, normal);
+@include fontface('noto-sans', 'bold-italic', 700, italic);

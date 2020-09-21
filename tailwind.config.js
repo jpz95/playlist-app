@@ -1,4 +1,4 @@
-const { colors } = require('tailwindcss/defaultTheme');
+const { colors, fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   future: {
@@ -7,6 +7,9 @@ module.exports = {
   },
   purge: [],
   theme: {
+    fontFamily: {
+      sans: ['noto-sans', ...fontFamily.sans],
+    },
     colors: {
       // cool navy
       primary: {
