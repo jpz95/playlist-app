@@ -23,6 +23,9 @@ if (!NODE_ENV) {
   );
 }
 
+// eslint-disable-next-line import/no-dynamic-require
+const { appPrefix } = require(paths.appPackageJson);
+
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
 const dotenvFiles = [
   `${paths.dotenv}.${NODE_ENV}.local`,
@@ -67,11 +70,11 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 
 // Grab NODE_ENV and APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
-const APP = /^APP_/i;
+const appRegex = new RegExp(`^${appPrefix.toUpperCase()}`, 'i');
 
 function getEnvironmentVariables(publicUrl) {
   const raw = Object.keys(process.env)
-    .filter((key) => APP.test(key))
+    .filter((key) => appRegex.test(key))
     .reduce(
       (env, key) => {
         // eslint-disable-next-line no-param-reassign
@@ -96,6 +99,9 @@ function getEnvironmentVariables(publicUrl) {
         WDS_SOCKET_PATH: process.env.WDS_SOCKET_PATH,
         WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT,
         GENERATE_SOURCEMAP: process.env.GENERATE_SOURCEMAP,
+        // Provide the src/ code with the project-specific app prefix,
+        // for parsing the env constants into a module.
+        APP_PREFIX: appPrefix.toUpperCase(),
       },
     );
   // Stringify all values so we can feed into Webpack DefinePlugin
